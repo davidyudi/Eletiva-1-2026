@@ -4,18 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revisão HTML e CSS</title>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        p {
+            color: red;
+        }
+        #nome {
+            color: blue;
+        }
+        .titulos {
+            color: magenta;
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav></nav>
     </header>
     <main>
-        <h1>Cabeçalho nível 1</h1>
-        <h6>Cabeçalho nível 6</h6>
+        <h1 class="titulos">Cabeçalho nível 1</h1>
+        <h6 class="titulos">Cabeçalho nível 6</h6>
         <p>Este é um parágrafo</p>
         <a href="www.google.com" target="_blank">
             Página do Google
         </a>
+        <ol>
+            <li>Um</li>
+            <li>Dois</li>
+        </ol>
+        <ul>
+            <li>Elemento</li>
+            <li>Elemento</li>
+        </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>Coluna 1</th>
+                    <th>Coluna 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>valor 1</td>
+                    <td>Valoe 2</td>
+                </tr>
+                <tr>
+                    <td>valor 3</td>
+                    <td>Valoe 4</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">Total: R$1000,00</td>
+                </tr>
+            </tfoot>
+        </table>
+        <form action="" method="">
+            <label for="name">Informe seu nome:</label>
+            <input type="text" id="nome" name="nome">
+            <label for="sexo">Selecione o sexo:</label>
+            <select name="sexo" id="sexo">
+                <option value="F">Feminino</option>
+                <option value="M">Masculino</option>
+            </select>
+            <label for="obs">Observação</label>
+            <textarea id="obs" name="obs"></textarea>
+            <button type="submit">
+                Enviar
+            </button>
+        </form>
     </main>
     <footer>
         <p>Rodapé</p>
