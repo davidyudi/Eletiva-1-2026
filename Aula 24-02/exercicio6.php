@@ -4,13 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Exercicio 1</title>
+    <title>Exercicio 6</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container py-3">
-        <h1>Exercicio 3</h1>
+        <h1>Exercicio 6</h1>
         <form method="post">
             <div class="mb-3">
                 <label for="celsius" class="form-label">Informe a temperatura em Celsius</label>
