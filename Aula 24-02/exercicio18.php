@@ -4,13 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Exercicio 17</title>
+    <title>Exercicio 18</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container py-3">
-        <h1>Exercicio 17</h1>
+        <h1>Exercicio 18</h1>
         <form method="post">
             <div class="mb-3">
                 <label for="capital" class="form-label">Informe o capital</label>
@@ -21,7 +21,7 @@
                 <input type="number" id="taxa" name="taxa" class="form-control" required="">
             </div>
             <div class="mb-3">
-                <label for="periodo" class="form-label">Informe taxa de período (ano)</label>
+                <label for="periodo" class="form-label">Informe taxa de período (meses)</label>
                 <input type="number" id="periodo" name="periodo" class="form-control" required="">
             </div>
             <button type="submit" class="btn btn-primary">Calcular</button>
@@ -31,7 +31,7 @@
                 $capital = $_POST['capital'];
                 $taxa = $_POST['taxa'];
                 $periodo = $_POST['periodo'];
-                $res = $capital + ($capital * ($taxa / 100) * $periodo);
+                $res = $capital * ((1 + ($taxa / 100)) ** $periodo);
                 echo "O resultado é $res";
             }
         ?>
