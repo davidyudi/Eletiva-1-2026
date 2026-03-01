@@ -11,6 +11,7 @@
 <body>
     <div class="container py-3">
         <h1>Formulário 3</h1>
+        <h1 class="d-grid gap-2 col-3 mx-auto">Sample Form</h1>
         <form method="post">
             <div class="row inline-row mb-3">
                 <label for="Name" class="col-sm-2 col-form-label">Partner Name</label>
@@ -38,6 +39,16 @@
                 <input type="text" id="address" name="address" class="form-control col-md-8">
             </div></div>
             <div class="row inline-row mb-3">
+                <label for="Start" class="col-sm-2 col-form-label">Contract Start Date</label>
+                <div class="col-md-4">
+                    <input type="text" id="Start" name="Start" class="form-control" placeholder="Date Start">
+                </div>
+                <label for="Expiry" class="col-sm-2 col-form-label">Contract Expiry Date</label>
+                <div class="col-md-4">
+                    <input type="text" id="Expiry" name="Expiry" class="form-control" placeholder="Date End">
+                </div>
+            </div>
+            <div class="row inline-row mb-3">
                 <label for="Minimum" class="col-sm-2 col-form-label">Minimum Loan Amount</label>
                 <div class="col-md-4">
                     <input type="text" id="Minimum" name="Minimum" class="form-control">
@@ -57,7 +68,7 @@
                     <input type="text" id="Deposit" name="Deposit" class="form-control">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button type="submit" class="btn btn-primary d-grid gap-2 col-1 mx-auto">Save</button>
         </form>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
