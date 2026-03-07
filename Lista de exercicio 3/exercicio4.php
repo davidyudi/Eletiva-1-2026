@@ -4,32 +4,28 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Exercicio 3</title>
+    <title>Exercicio 4</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container py-3">
-        <h1>Exercicio 3</h1>
+        <h1>Exercicio 4</h1>
         <form method="post">
             <div class="mb-3">
-                <label for="valora" class="form-label">Informe o valor A: </label>
-                <input type="number" id="valora" name="valora" class="form-control" required="">
-            </div>
-            <div class="mb-3">
-                <label for="valorb" class="form-label">Informe o valor B: </label>
-                <input type="number" id="valorb" name="valorb" class="form-control" required="">
+                <label for="valor" class="form-label">Informe o valor do produto: </label>
+                <input type="number" id="valor" name="valor" class="form-control" required="">
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $valora = $_POST["valora"];
-            $valorb = $_POST["valorb"];
-            if ($valora != $valorb) {
-                echo"$valora $valorb";
+            $valor = $_POST["valor"];
+            if ($valor > 100) {
+                $valordesc = $valor - ($valor * (15/100));
+                echo"O novo valor do produto é de R$$valordesc";
             } else {
-                echo"Números iguais: $valora";
+                echo"Sem desconto ;-;";
             }
         }
 
