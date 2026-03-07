@@ -22,7 +22,7 @@
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $valor = $_POST["valor"];
             do {
-                echo"$valor ";
+                echo"<p>$valor</p>";
                 $valor--;
             } while ($valor != 0);
         }

@@ -27,7 +27,7 @@
                 $i++;
                 $soma = $soma + $i;
                 }
-            echo"A soma é $soma ";
+            echo"<p>A soma é $soma</p>";
         }
         ?>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"

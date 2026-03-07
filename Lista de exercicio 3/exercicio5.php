@@ -23,43 +23,43 @@
             $valor = $_POST["valor"];
             switch ($valor) {
                 case "1":
-                    echo"Janeiro";
+                    echo"<p>Janeiro</p>";
                     break;
                 case "2":
-                    echo "Fevereiro";
+                    echo "<p>Fevereiro</p>";
                     break;
                 case "3":
-                    echo "Março";
+                    echo "<p>Março</p>";
                     break;
                 case "4":
-                    echo "Abril";
+                    echo "<p>Abril</p>";
                     break;
                 case "5":
-                    echo "Maio";
+                    echo "<p>Maio</p>";
                     break;
                 case "6":
-                    echo "Junho";
+                    echo "<p>Junho</p>";
                     break;
                 case "7":
-                    echo "Julho";
+                    echo "<p>Julho</p>";
                     break;
                 case "8":
-                    echo "Agosto";
+                    echo "<p>Agosto</p>";
                     break;
                 case "9":
-                    echo "Setembro";
+                    echo "<p>Setembro</p>";
                     break;
                 case "10":
-                    echo "Outubro";
+                    echo "<p>Outubro</p>";
                     break;
                 case "11":
-                    echo "Novembro";
+                    echo "<p>Novembro</p>";
                     break;
                 case "12":
-                    echo "Dezembro";
+                    echo "<p>Dezembro</p>";
                     break;
                 default:
-                    echo "Valor inválido";
+                    echo "<p>Valor inválido</p>";
         }
         }
         ?>

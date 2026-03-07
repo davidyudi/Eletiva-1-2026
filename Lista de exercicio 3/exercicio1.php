@@ -22,8 +22,8 @@
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $lista = $_POST["valores"];
             $menorValor = min($lista);
-            $posicaoMenor = array_search($menorValor, $lista);
-            echo "O menor valor é $menorValor e ele está no input " . ($posicaoMenor + 1);
+            $posicaoMenor = 1 + array_search($menorValor, $lista);
+            echo "<p>O menor valor é $menorValor e ele está no input $posicaoMenor</p>";
         }
         ?>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"

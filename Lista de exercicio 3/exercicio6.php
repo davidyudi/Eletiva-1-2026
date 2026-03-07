@@ -22,7 +22,7 @@
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $valor = $_POST["valor"];
             for ($i = 1; $i <= $valor; $i++) {
-                echo" $i";
+                echo"<p>$i</p>";
             }
         }
         ?>

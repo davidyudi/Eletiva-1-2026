@@ -31,7 +31,7 @@
             } else {
                 $res = 3 * ($valor1 + $valor2);
             }
-            echo "O resultado é $res";
+            echo "<p>O resultado é $res</p>";
         }
 
         ?>

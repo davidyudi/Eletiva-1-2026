@@ -23,9 +23,9 @@
             $valor = $_POST["valor"];
             if ($valor > 100) {
                 $valordesc = $valor - ($valor * (15/100));
-                echo"O novo valor do produto é de R$$valordesc";
+                echo"<p>O novo valor do produto é de R$$valordesc</p>";
             } else {
-                echo"Sem desconto ;-;";
+                echo"<p>Sem desconto ;-;</p>";
             }
         }
 

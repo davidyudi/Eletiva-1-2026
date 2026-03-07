@@ -27,9 +27,9 @@
             $valora = $_POST["valora"];
             $valorb = $_POST["valorb"];
             if ($valora != $valorb) {
-                echo"$valora $valorb";
+                echo"<p>$valora $valorb</p>";
             } else {
-                echo"Números iguais: $valora";
+                echo"<p>Números iguais: $valora</p>";
             }
         }
 

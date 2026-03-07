@@ -24,7 +24,7 @@
             $i1 = $valor;
             $i2 = $valor - 1;
             for ($valor; $valor != 1; $valor--) {
-                echo"$i1 ";
+                echo"<p>$i1</p>";
                 $i1 = $i1 * $i2;
                 $i2 = $i2 - 1;
                 }
