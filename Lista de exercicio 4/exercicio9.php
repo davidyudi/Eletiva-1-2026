@@ -19,11 +19,11 @@
 <?php
     if($_SERVER['REQUEST_METHOD'] == "POST") {
         $palavra = $_POST['palavra'];
-        $infim = trim($palavra);
-        $sem = str_replace(" ", "", $palavra);
-        echo "<p>A palavra '<pre style='display:inline'>$palavra</pre>' normal</p>
-        <pre style='display:inline'>$infim</pre>
-        <p>A palavra $sem sem espaço</p>";
+        $trim = trim($palavra);
+        $replace = str_replace(" ", "", $palavra);
+        echo "<p><pre>A palavra '$palavra' original</pre><p>
+        <p><pre>A palavra '$trim' sem espaços extras no início e no final</pre><p>
+        <p><prev>A palavra '$replace' sem espaço</prev></p>";
     }
 ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
