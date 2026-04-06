@@ -1,4 +1,3 @@
-@ -1,54 +0,0 @@
 <!doctype html>
 <html lang="pt-BR">
 
@@ -15,10 +14,10 @@
         <form method="POST">
             <?php for ($i = 1; $i <= 5; $i++): ?>
                 <label class="form-label">Informe o <?php echo $i; ?>º nome do aluno: </label>
-                <input class="form-control mb-3" type="text" name="nome[]" required><br>
+                <input class="form-control mb-3" type="text" name="nome[]" required>
                 <?php for ($j = 1; $j <= 3; $j++): ?>
                 <label class="form-label">Informe a <?php echo $j; ?>ª nota do <?php echo $i?>º aluno: </label>
-                <input class="form-control mb-3" type="text" name="notas[]" required><br>
+                <input class="form-control mb-3" type="text" name="notas[]" required>
                 <?php endfor; ?>
             <?php endfor; ?>
             <button type="submit" class="btn btn-primary">Enviar</button>
