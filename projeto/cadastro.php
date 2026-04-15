@@ -31,7 +31,7 @@
   </div>
   <?php
     if($_SERVER['REQUEST_METHOD'] == "POST"){
-        require("conexao.php");
+        require_once("conexao.php");
         $nome = $_POST['nome'];
         $email = $_POST['email'];
         $senha = password_hash($_POST['senha'], PASSWORD_BCRYPT);
