@@ -1,53 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cadastro</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-  <div class="container mt-5">
-    <h2 class="mb-4">Cadastro de Usuário</h2>
-    <form action="cadastro.php" method="POST">
+<body class="bg-light">
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+    <h3 class="text-center mb-4">Cadastro</h3>
+
+    <form>
       <div class="mb-3">
-        <label for="nomeCadastro" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="nomeCadastro" name="nome" placeholder="Digite seu nome completo" required />
+        <label class="form-label">Nome</label>
+        <input type="text" class="form-control" placeholder="Digite seu nome" required>
       </div>
+
       <div class="mb-3">
-        <label for="emailCadastro" class="form-label">Email</label>
-        <input type="email" class="form-control" id="emailCadastro" name="email" placeholder="Digite seu email" required />
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" placeholder="Digite seu email" required>
       </div>
+
       <div class="mb-3">
-        <label for="senhaCadastro" class="form-label">Senha</label>
-        <input type="password" class="form-control" id="senhaCadastro" name="senha" placeholder="Digite uma senha" required />
+        <label class="form-label">Senha</label>
+        <input type="password" class="form-control" placeholder="Digite sua senha" required>
       </div>
-      <button type="submit" class="btn btn-success">Cadastrar</button>
+
+      <button type="submit" class="btn btn-success w-100">Cadastrar</button>
     </form>
-    <p class="mt-3">
-      Já tem uma conta? 
-      <a href="login.php">Faça login aqui</a>
+
+    <p class="text-center mt-3">
+      Já tem conta? <a href="login.html">Faça login</a>
     </p>
   </div>
-  <?php
-    if($_SERVER['REQUEST_METHOD'] == "POST"){
-        require_once("conexao.php");
-        $nome = $_POST['nome'];
-        $email = $_POST['email'];
-        $senha = password_hash($_POST['senha'], PASSWORD_BCRYPT);
-        try{
-            $stmt = $pdo->prepare("INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)");
-            if($stmt->execute([$nome, $email, $senha])){
-                header("location: index.php?cadastro=true");
-            } else{
-                header("location: index.php?cadastro=false");
-            }
-        } catch(Exception $e){
-            echo "Erro ao executar o comando SQL: ".$e->getMessage();
-        }
+</div>
 
-    }
-
-    ?>
 </body>
 </html>

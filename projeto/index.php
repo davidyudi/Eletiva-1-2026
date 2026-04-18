@@ -1,64 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Login</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sistema</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<body class="bg-light">
 
-<body>
-  <div class="container mt-5">
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+    <h3 class="text-center mb-4">Sistema de Controle de Estoque</h3>
+
+    <form method="post">
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input name="email" type="email" class="form-control" placeholder="Digite seu email" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Senha</label>
+        <input name="senha" type="password" class="form-control" placeholder="Digite sua senha" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Entrar</button>
+    </form>
+
     <?php
-      if (isset($_GET['cadastro'])) {
-        $cadastro = $_GET['cadastro'];
-        if ($cadastro) {
-          echo "<p class='text-success'>Cadastro realizado com sucesso!</p>";
-        } else {
-          echo "<p class='text-danger'>Erro ao realizar o cadastro!</p>";
-        }
-      }
-      if($_SERVER['REQUEST_METHOD'] == "POST"){
-        require('conexao.php');
+      session_start();
+      if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $email = $_POST['email'];
         $senha = $_POST['senha'];
-        try{
-          $stmt = $pdo->prepare("SELECT * FROM usuario WHERE email = ?");
-          $stmt->execute([$email]);
-          $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-          if($usuario && password_verify($senha, $usuario['senha'])){
-            session_start();
-            $_SESSION['acesso'] = true;
-            $_SESSION['nome'] = $usuario['nome'];
-            header('location: principal.php');
-          } else {
-            echo "<p class='text-danger'>Credenciais inválidas!</p>";
-          }
-        } catch(\Exception $e){
-          echo "Erro: ".$e->getMessage();
+        if($email == "adm@adm" && $senha == '123'){
+          $_SESSION['nome'] = 'Administrador';
+          $_SESSION['acesso'] = true; 
+          header('Location: principal.php');
+        } else {
+          $_SESSION['acesso'] = false;
+          echo "<p class='text-danger'>Email e/ou senha incorretos!</p>";
         }
       }
-
-
     ?>
-    <h2 class="mb-4">Acesso ao Sistema</h2>
-    <form action="index.php" method="POST">
-      <div class="mb-3">
-        <label for="emailLogin" class="form-label">Email</label>
-        <input type="email" class="form-control" id="emailLogin" name="email" placeholder="Digite seu email" required />
-      </div>
-      <div class="mb-3">
-        <label for="senhaLogin" class="form-label">Senha</label>
-        <input type="password" class="form-control" id="senhaLogin" name="senha" placeholder="Digite sua senha" required />
-      </div>
-      <button type="submit" class="btn btn-primary">Entrar</button>
-    </form>
-    <p class="mt-3">
-      Ainda não tem uma conta?
-      <a href="cadastro.php">Cadastre-se aqui</a>
+
+    <p class="text-center mt-3">
+      Não tem conta? <a href="cadastro.html">Cadastre-se</a>
     </p>
   </div>
-</body>
+</div>
 
+</body>
 </html>

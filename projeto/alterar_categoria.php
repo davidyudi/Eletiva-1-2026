@@ -2,7 +2,7 @@
     require_once('cabecalho.php');
 ?>
 
-<h1>Nova Categoria</h1>
+<h1>Alterar Categoria</h1>
     <form method="post">
         <div class="mb-3">
               <label for="descricao" class="form-label">Informe a descrição</label>
