@@ -25,8 +25,8 @@
             <td><?= $r['id'] ?></td>
             <td><?= $r['nome'] ?></td>
             <td class="d-flex gap-2">
-            <a href="alterar_categoria.php" class="btn btn-sm btn-warning">Editar</a>
-            <a href="consultar_categoria.php" class="btn btn-sm btn-info">Consultar</a>
+            <a href="alterar_categoria.php?id=<?= $r['id'] ?>" class="btn btn-sm btn-warning">Editar</a>
+            <a href="consultar_categoria.php?id=<?= $r['id'] ?>" class="btn btn-sm btn-info">Consultar</a>
             </td>
         </tr>
         <?php endforeach; ?>
