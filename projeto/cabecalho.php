@@ -1,53 +1,96 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['acesso']) || $_SESSION['acesso'] == false){
-        header('Location: index.php');
-        exit();
-    }
+session_start();
+if (!isset($_SESSION['acesso']) || $_SESSION['acesso'] == false) {
+    header('Location: index.php');
+    exit();
+}
+$pagina_atual = basename($_SERVER['PHP_SELF']);
 ?>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sistema</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frota System</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="#">Sistema</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Alternar navegação">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">      
-        <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="principal.php">Início</a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Funções Básicas
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown2">
-                <li><a class="dropdown-item" href="categorias.php">Categorias</a></li>
-                <li><a class="dropdown-item" href="produtos.php">Produtos</a></li>
-            </ul>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Funções de Saída
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown3">
-                <li><a class="dropdown-item" href="#">Relatório de Produtos</a></li>
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="logout.php">Sair</a>
-        </li>
-      </ul>
-    </div>
-  </div>
+
+<!-- NAVBAR FLUTUANTE -->
+<nav class="navbar-frota">
+  <a href="principal.php" class="nav-brand">
+    <div class="brand-icon">🚗</div>
+    <span><b>Frota</b>System</span>
+  </a>
+
+  <ul class="nav-links">
+    <li>
+      <a href="principal.php" class="<?= $pagina_atual=='principal.php'?'active':'' ?>">
+        <span class="nav-icon">🏠</span> Início
+      </a>
+    </li>
+    <li class="nav-dropdown">
+      <a href="#" class="<?= in_array($pagina_atual,['veiculos.php','motoristas.php','categoria_veiculo.php'])?'active':'' ?>">
+        <span class="nav-icon">⚙️</span> Cadastros
+      </a>
+      <div class="dropdown-menu-frota">
+        <a href="veiculos.php">🚙 Veículos</a>
+        <a href="motoristas.php">👤 Motoristas</a>
+        <a href="categoria_veiculo.php">📂 Categorias</a>
+      </div>
+    </li>
+    <li class="nav-dropdown">
+      <a href="#" class="<?= in_array($pagina_atual,['viagens.php','abastecimentos.php','manutencoes.php'])?'active':'' ?>">
+        <span class="nav-icon">📋</span> Operações
+      </a>
+      <div class="dropdown-menu-frota">
+        <a href="viagens.php">🗺️ Viagens</a>
+        <a href="abastecimentos.php">⛽ Abastecimentos</a>
+        <a href="manutencoes.php">🔧 Manutenções</a>
+      </div>
+    </li>
+    <li>
+      <a href="relatorios.php" class="<?= $pagina_atual=='relatorios.php'?'active':'' ?>">
+        <span class="nav-icon">📊</span> Relatórios
+      </a>
+    </li>
+  </ul>
+
+  <a href="logout.php" class="nav-logout">
+    🚪 Sair
+  </a>
+
+  <!-- Hambúrguer mobile -->
+  <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">☰</button>
 </nav>
-<div class="container py-3">
+
+<!-- Menu mobile -->
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="principal.php">🏠 Início</a>
+  <hr>
+  <a href="veiculos.php">🚙 Veículos</a>
+  <a href="motoristas.php">👤 Motoristas</a>
+  <a href="categoria_veiculo.php">📂 Categorias</a>
+  <hr>
+  <a href="viagens.php">🗺️ Viagens</a>
+  <a href="abastecimentos.php">⛽ Abastecimentos</a>
+  <a href="manutencoes.php">🔧 Manutenções</a>
+  <hr>
+  <a href="relatorios.php">📊 Relatórios</a>
+  <a href="logout.php" style="color:#E05252;">🚪 Sair</a>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.querySelector('.nav-toggle');
+  if (!menu.contains(e.target) && !btn.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
+</script>
+
+<div class="page-wrapper">
