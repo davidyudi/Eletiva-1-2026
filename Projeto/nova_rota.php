@@ -41,7 +41,7 @@
                         <div class="row g-3 mb-4">
                             <div class="col-md-4">
                                 <label for="estado_inicio_sel" class="form-label">Estado</label>
-                                <select id="estado_inicio_sel" name="estado_inicio" class="form-control" required
+                                <select id="estado_inicio_sel" name="estado_inicio" class="form-select" required
                                     onchange="carregarCidades(this.value, 'cidade_inicio_id', 'cidade_inicio_label')">
                                     <option value="">Selecione...</option>
                                     <?php foreach ($estados as $e): ?>
@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-md-8">
                                 <label for="cidade_inicio_id" class="form-label">Cidade</label>
-                                <select id="cidade_inicio_id" name="cidade_inicio_id" class="form-control" required disabled>
+                                <select id="cidade_inicio_id" name="cidade_inicio_id" class="form-select" required disabled>
                                     <option value="">Selecione o estado primeiro...</option>
                                 </select>
                                 <!-- campo hidden para salvar o nome da cidade -->
@@ -66,7 +66,7 @@
                         <div class="row g-3 mb-4">
                             <div class="col-md-4">
                                 <label for="estado_fim_sel" class="form-label">Estado</label>
-                                <select id="estado_fim_sel" name="estado_fim" class="form-control" required
+                                <select id="estado_fim_sel" name="estado_fim" class="form-select" required
                                     onchange="carregarCidades(this.value, 'cidade_fim_id', 'cidade_fim_label')">
                                     <option value="">Selecione...</option>
                                     <?php foreach ($estados as $e): ?>
@@ -78,7 +78,7 @@
                             </div>
                             <div class="col-md-8">
                                 <label for="cidade_fim_id" class="form-label">Cidade</label>
-                                <select id="cidade_fim_id" name="cidade_fim_id" class="form-control" required disabled>
+                                <select id="cidade_fim_id" name="cidade_fim_id" class="form-select" required disabled>
                                     <option value="">Selecione o estado primeiro...</option>
                                 </select>
                                 <input type="hidden" id="cidade_fim_label" name="cidade_fim_nome">

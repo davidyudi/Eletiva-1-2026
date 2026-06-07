@@ -158,9 +158,9 @@ CREATE TABLE `motoristas` (
 CREATE TABLE `rotas` (
   `id` int(11) NOT NULL,
   `Cidade_inicio` varchar(255) NOT NULL,
-  `Estado_inicio` varchar(255) NOT NULL,
+  `Estado_inicio` char(2) NOT NULL,
   `Cidade_fim` varchar(255) NOT NULL,
-  `Estado_fim` varchar(255) NOT NULL
+  `Estado_fim` char(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
