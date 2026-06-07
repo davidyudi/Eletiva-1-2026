@@ -19,28 +19,56 @@
 </head>
 <body>
 
-<nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+    <div class="container-fluid px-4">
 
-<a href="crud_motoristas.php"
-   class="nav-link fs-4 px-4 py-3 <?= $pagina == 'crud_motoristas.php' ? 'active' : '' ?>">
-    Motoristas
-</a>
-
-<a href="crud_veiculos.php"
-   class="nav-link fs-4 px-4 py-3 <?= $pagina == 'crud_veiculos.php' ? 'active' : '' ?>">
-    Veículos
-</a>
-
-<a href="crud_rotas.php"
-   class="nav-link fs-4 px-4 py-3 <?= $pagina == 'crud_rotas.php' ? 'active' : '' ?>">
-    Rotas
-</a>
-
-        <a href="logout.php" class="btn btn-outline-danger ms-auto fs-4 px-5 py-3 me-3">
-            Sair
+        <a class="navbar-brand fw-bold fs-2 me-5" href="principal.php">
+            Sistema de Frotas
         </a>
+
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSistema">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSistema">
+
+            <ul class="navbar-nav gap-2">
+
+                <li class="nav-item">
+                    <a href="crud_motoristas.php"
+                       class="nav-link fs-4 px-4 py-3 <?= $pagina == 'crud_motoristas.php' ? 'active fw-bold bg-primary rounded' : '' ?>">
+                        Motoristas
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="crud_veiculos.php"
+                       class="nav-link fs-4 px-4 py-3 <?= $pagina == 'crud_veiculos.php' ? 'active fw-bold bg-primary rounded' : '' ?>">
+                        Veículos
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="crud_rotas.php"
+                       class="nav-link fs-4 px-4 py-3 <?= $pagina == 'crud_rotas.php' ? 'active fw-bold bg-primary rounded' : '' ?>">
+                        Rotas
+                    </a>
+                </li>
+
+            </ul>
+
+            <div class="ms-auto">
+                <a href="logout.php"
+                   class="btn btn-danger fs-5 px-4 py-2">
+                    Sair
+                </a>
+            </div>
+
+        </div>
 
     </div>
 </nav>
-<main class="conteudo">
+
+<main class="container-fluid py-4">
