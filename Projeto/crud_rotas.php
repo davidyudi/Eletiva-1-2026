@@ -2,7 +2,7 @@
 include('cabecalho.php');
 require_once('conexao.php');
 try {
-    $stmt    = $conexao->query('SELECT * FROM rotas');
+    $stmt   = $conexao->query('SELECT * FROM rotas');
     $resultado = $stmt->fetchAll();
 } catch (Exception $e) {
     echo "Erro: " . $e->getMessage();
