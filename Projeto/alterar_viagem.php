@@ -49,9 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $id
             ])
         ) {
-            $mensagem = "<p>Alteração Realizada!</p>";
+            header("Location: crud_viagem.php?msg=editado");
+            exit;
         } else {
-            $mensagem = "<p>Erro ao Alterar!</p>";
+            header("Location: crud_viagem.php?msg=erro");
+            exit;
         }
     } catch (Exception $e) {
         echo "Erro: " . $e->getMessage();
@@ -60,15 +62,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 try {
 
-    $stmt = $conexao->prepare(
-        "SELECT * FROM viagens WHERE id = ?"
-    );
+    if (!isset($_GET['id']) || empty($_GET['id'])) {
+        header("Location: crud_viagem.php?msg=erro");
+        exit;
+    }
 
-    $stmt->execute([$_GET['id']]);
+    $id = $_GET['id'];
 
-    $resultado = $stmt->fetch();
+    $stmtSelect = $conexao->prepare("SELECT * FROM viagens WHERE id = ?");
+    $stmtSelect->execute([$id]);
+
+    $resultado = $stmtSelect->fetch(PDO::FETCH_ASSOC);
+
+    if (!$resultado) {
+        header("Location: crud_viagem.php?msg=erro");
+        exit;
+    }
 } catch (Exception $e) {
-    echo "Erro: " . $e->getMessage();
+    header("Location: crud_viagem.php?msg=erro");
+    exit;
 }
 ?>
 

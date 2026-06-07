@@ -1,6 +1,27 @@
 <?php
-include('cabecalho.php');
 require_once('conexao.php');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $cidade_inicio = $_POST['cidade_inicio_nome'];
+    $estado_inicio = $_POST['estado_inicio'];
+    $cidade_fim    = $_POST['cidade_fim_nome'];
+    $estado_fim    = $_POST['estado_fim'];
+    try {
+        $stmt = $conexao->prepare(
+            'INSERT INTO rotas (Cidade_inicio, Estado_inicio, Cidade_fim, Estado_fim) VALUES (?,?,?,?);'
+        );
+        if ($stmt->execute([$cidade_inicio, $estado_inicio, $cidade_fim, $estado_fim])) {
+            header("Location: crud_rotas.php?msg=criado");
+            exit;
+        } else {
+            header("Location: crud_rotas.php?msg=erro");
+            exit;
+        }
+    } catch (Exception $e) {
+        header("Location: crud_rotas.php?msg=erro");
+        exit;
+    }
+}
 
 $estados = $conexao->query(
     'SELECT e.id, e.sigla FROM estados e ORDER BY e.sigla'
@@ -15,12 +36,9 @@ foreach ($todasCidades as $c) {
     $cidadesPorEstado[$c['estado_id']][] = ['id' => $c['id'], 'nome' => $c['nome']];
 }
 $cidadesJson = json_encode($cidadesPorEstado, JSON_UNESCAPED_UNICODE);
-
-$estadosPorSigla = [];
-foreach ($estados as $e) {
-    $estadosPorSigla[$e['sigla']] = $e['id'];
-}
 $estadosJson = json_encode($estados, JSON_UNESCAPED_UNICODE);
+
+include('cabecalho.php');
 ?>
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -123,24 +141,4 @@ $estadosJson = json_encode($estados, JSON_UNESCAPED_UNICODE);
     }
 </script>
 
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $cidade_inicio = $_POST['cidade_inicio_nome'];
-    $estado_inicio = $_POST['estado_inicio'];
-    $cidade_fim    = $_POST['cidade_fim_nome'];
-    $estado_fim    = $_POST['estado_fim'];
-    try {
-        $stmt = $conexao->prepare(
-            'INSERT INTO rotas (Cidade_inicio, Estado_inicio, Cidade_fim, Estado_fim) VALUES (?,?,?,?);'
-        );
-        if ($stmt->execute([$cidade_inicio, $estado_inicio, $cidade_fim, $estado_fim])) {
-            echo "<p>Cadastro Realizado!</p>";
-        } else {
-            echo "<p>Erro ao cadastrar! Tente novamente.</p>";
-        }
-    } catch (Exception $e) {
-        echo "Erro: " . $e->getMessage();
-    }
-}
-?>
 <?php include('rodape.php'); ?>

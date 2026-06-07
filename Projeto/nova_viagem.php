@@ -15,6 +15,51 @@ $rotas = $conexao->query(
 )->fetchAll();
 ?>
 
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $Motoristas_id = $_POST['Motoristas_id'];
+    $Veiculos_id   = $_POST['Veiculos_id'];
+    $rotas_id      = $_POST['rotas_id'];
+    $data_saida    = $_POST['data_saida'];
+    $data_chegada  = $_POST['data_chegada'];
+
+    try {
+
+        $stmt = $conexao->prepare(
+            "INSERT INTO viagens
+            (
+                Veiculos_id,
+                Motoristas_id,
+                rotas_id,
+                data_saida,
+                data_chegada
+            )
+            VALUES (?,?,?,?,?)"
+        );
+
+        $ok = $stmt->execute([
+            $Veiculos_id,
+            $Motoristas_id,
+            $rotas_id,
+            $data_saida,
+            $data_chegada
+        ]);
+
+        if ($ok) {
+            header("Location: crud_viagem.php?msg=criado");
+            exit;
+        } else {
+            header("Location: crud_viagem.php?msg=erro");
+            exit;
+        }
+    } catch (Exception $e) {
+        header("Location: crud_viagem.php?msg=erro");
+        exit;
+    }
+}
+?>
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-8">
@@ -22,7 +67,7 @@ $rotas = $conexao->query(
             <div class="card shadow rounded-4 border-0">
 
                 <div class="card-header bg-dark text-white py-3 rounded-top-4">
-                    <h5 class="mb-0 px-2">| Nova Viagem</h5>
+                    <h5 class="mb-0 px-2">Nova Viagem</h5>
                 </div>
 
                 <div class="card-body p-4">
@@ -159,47 +204,4 @@ $rotas = $conexao->query(
         </div>
     </div>
 </div>
-
-<?php
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $Motoristas_id = $_POST['Motoristas_id'];
-    $Veiculos_id   = $_POST['Veiculos_id'];
-    $rotas_id      = $_POST['rotas_id'];
-    $data_saida    = $_POST['data_saida'];
-    $data_chegada  = $_POST['data_chegada'];
-
-    try {
-
-        $stmt = $conexao->prepare(
-            "INSERT INTO viagens
-            (
-                Veiculos_id,
-                Motoristas_id,
-                rotas_id,
-                data_saida,
-                data_chegada
-            )
-            VALUES (?,?,?,?,?)"
-        );
-
-        if (
-            $stmt->execute([
-                $Veiculos_id,
-                $Motoristas_id,
-                $rotas_id,
-                $data_saida,
-                $data_chegada
-            ])
-        ) {
-            echo "<p>Cadastro Realizado!</p>";
-        } else {
-            echo "<p>Erro ao cadastrar!</p>";
-        }
-    } catch (Exception $e) {
-        echo "Erro: " . $e->getMessage();
-    }
-}
-
-include('rodape.php');
-?>
+<?php require_once("rodape.php"); ?>

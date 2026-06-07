@@ -13,12 +13,23 @@ try {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_GET['id'];
     try {
+        $stmtCheck = $conexao->prepare("SELECT COUNT(*) FROM viagens WHERE rotas_id = ?");
+        $stmtCheck->execute([$id]);
+        $qtd = $stmtCheck->fetchColumn();
+
+        if ($qtd > 0) {
+            header("Location: crud_rotas.php?msg=em_uso");
+            exit;
+        }
+
         $sql  = "DELETE FROM rotas WHERE id = ?";
         $stmt = $conexao->prepare($sql);
         if ($stmt->execute([$id])) {
-            header('Location: crud_rotas.php');
+            header("Location: crud_rotas.php?msg=excluido");
+            exit;
         } else {
-            echo "Erro ao excluir";
+            header("Location: crud_rotas.php?msg=erro");
+            exit;
         }
     } catch (Exception $e) {
         echo "Erro: " . $e->getMessage();

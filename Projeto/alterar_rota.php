@@ -29,9 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql  = "UPDATE rotas SET Cidade_inicio=?, Estado_inicio=?, Cidade_fim=?, Estado_fim=? WHERE id=?";
         $stmt = $conexao->prepare($sql);
         if ($stmt->execute([$cidade_inicio, $estado_inicio, $cidade_fim, $estado_fim, $id])) {
-            $mensagem = "<p>Alteração Realizada!</p>";
+            header("Location: crud_rotas.php?msg=editado");
+            exit;
         } else {
-            $mensagem = "<p>Erro ao Alterar! Tente novamente.</p>";
+            header("Location: crud_rotas.php?msg=erro");
+            exit;
         }
     } catch (Exception $e) {
         echo "Erro: " . $e->getMessage();

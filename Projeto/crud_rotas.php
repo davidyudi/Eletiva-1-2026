@@ -8,7 +8,53 @@ try {
     echo "Erro: " . $e->getMessage();
 }
 ?>
+<?php if (isset($_GET['msg'])): ?>
 
+    <?php if ($_GET['msg'] == 'criado'): ?>
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show text-center shadow-sm">
+                ✅ Rota criada com sucesso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($_GET['msg'] == 'editado'): ?>
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show text-center shadow-sm">
+                ✏️ Rota editada com sucesso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($_GET['msg'] == 'excluido'): ?>
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show text-center shadow-sm">
+                🗑️ Rota excluída com sucesso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($_GET['msg'] == 'em_uso'): ?>
+        <div class="container mt-3">
+            <div class="alert alert-warning alert-dismissible fade show text-center shadow-sm">
+                ⚠️ Esta rota não pode ser excluída pois está em uso em uma viagem!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($_GET['msg'] == 'erro'): ?>
+        <div class="container mt-3">
+            <div class="alert alert-danger alert-dismissible fade show text-center shadow-sm">
+                ❌ Ocorreu um erro ao executar a operação!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
 <h2>Rotas</h2>
 <a href="nova_rota.php" class="btn btn-success mb-3">Novo Registro</a>
 <a href="principal.php" class="btn btn-secondary mb-3 me-2">Voltar</a>

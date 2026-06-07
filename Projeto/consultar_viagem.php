@@ -31,23 +31,23 @@ try {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
     $id = $_GET['id'];
 
     try {
 
         $sql = "DELETE FROM viagens WHERE id = ?";
-
         $stmt = $conexao->prepare($sql);
 
-        if ($stmt->execute([$id])) {
-            header('Location: crud_viagem.php');
-            exit;
-        } else {
-            echo "Erro ao excluir";
-        }
+        $stmt->execute([$id]);
+
+        header("Location: crud_viagem.php?msg=excluido");
+        exit;
+
     } catch (Exception $e) {
         echo "Erro: " . $e->getMessage();
     }
+
 }
 ?>
 

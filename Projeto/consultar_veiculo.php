@@ -16,10 +16,12 @@
             $sql = "DELETE FROM Veiculos WHERE id = ?";
             $stmt = $conexao->prepare($sql);
             if($stmt->execute([$id])){
-                header('Location:crud_veiculos.php');
+                header('Location: crud_veiculos.php?msg=excluido');
+                exit;
             }
             else{
-                echo "Erro ao excluir";
+                header('Location: crud_veiculos.php?msg=erro');
+                exit;
             }
         } catch(Exception $e){
             echo "Erro: ".$e->getMessage();

@@ -14,9 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql  = "UPDATE motoristas SET nome=?, data_nascimento=?, cpf=?, email=?, telefone=?, cnh=? WHERE id=?";
         $stmt = $conexao->prepare($sql);
         if ($stmt->execute([$nome, $data_nascimento, $cpf, $email, $telefone, $cnh, $id])) {
-            $mensagem = "<p>Alteração Realizada!</p>";
+            header("Location: crud_motoristas.php?msg=editado");
+            exit;
         } else {
-            $mensagem = "<p>Erro ao Alterar! Tente novamente.</p>";
+            header("Location: crud_motoristas.php?msg=erro");
+            exit;
         }
     } catch (Exception $e) {
         echo "Erro: " . $e->getMessage();

@@ -1,4 +1,30 @@
 <?php
+require_once('conexao.php');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nome            = $_POST['nome'];
+    $data_nascimento = $_POST['data_nascimento'];
+    $cpf             = $_POST['cpf'];
+    $email           = $_POST['email'];
+    $telefone        = $_POST['telefone'];
+    $cnh             = $_POST['cnh'];
+    try {
+        $stmt = $conexao->prepare(
+            'INSERT INTO motoristas (nome, data_nascimento, cpf, email, telefone, cnh) VALUES (?,?,?,?,?,?);'
+        );
+        if ($stmt->execute([$nome, $data_nascimento, $cpf, $email, $telefone, $cnh])) {
+            header("Location: crud_motoristas.php?msg=criado");
+            exit;
+        } else {
+            header("Location: crud_motoristas.php?msg=erro");
+            exit;
+        }
+    } catch (Exception $e) {
+        header("Location: crud_motoristas.php?msg=erro");
+        exit;
+    }
+}
+
 include('cabecalho.php');
 ?>
 <div class="container mt-5">
@@ -50,29 +76,4 @@ include('cabecalho.php');
         </div>
     </div>
 </div>
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require_once('conexao.php');
-    $nome            = $_POST['nome'];
-    $data_nascimento = $_POST['data_nascimento'];
-    $cpf             = $_POST['cpf'];
-    $email           = $_POST['email'];
-    $telefone        = $_POST['telefone'];
-    $cnh             = $_POST['cnh'];
-    try {
-        $stmt = $conexao->prepare(
-            'INSERT INTO motoristas (nome, data_nascimento, cpf, email, telefone, cnh) VALUES (?,?,?,?,?,?);'
-        );
-        if ($stmt->execute([$nome, $data_nascimento, $cpf, $email, $telefone, $cnh])) {
-            echo "<p>Cadastro Realizado!</p>";
-        } else {
-            echo "<p>Erro ao cadastrar! Tente novamente.</p>";
-        }
-    } catch (Exception $e) {
-        echo "Erro: " . $e->getMessage();
-    }
-}
-?>
-<?php
-include('rodape.php');
-?>
+<?php include('rodape.php'); ?>

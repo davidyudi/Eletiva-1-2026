@@ -23,7 +23,7 @@ if (!isset($_SESSION['acesso']) || $_SESSION['acesso'] == false) {
         <div class="container-fluid px-4">
 
             <a class="navbar-brand fw-bold fs-2 me-5" href="principal.php">
-                Sistema de Frotas
+                FROTEIRA
             </a>
 
             <button class="navbar-toggler" type="button"

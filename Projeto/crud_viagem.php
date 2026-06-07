@@ -1,5 +1,6 @@
 <?php
 include('cabecalho.php');
+
 require_once('conexao.php');
 
 try {
@@ -29,7 +30,44 @@ try {
     echo "Erro: " . $e->getMessage();
 }
 ?>
+<?php if (isset($_GET['msg'])): ?>
 
+    <?php if ($_GET['msg'] == 'criado'): ?>
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show text-center shadow-sm">
+                ✅ Viagem criada com sucesso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($_GET['msg'] == 'editado'): ?>
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show text-center shadow-sm">
+                ✏️ Viagem editada com sucesso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($_GET['msg'] == 'excluido'): ?>
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show text-center shadow-sm">
+                🗑️ Viagem excluída com sucesso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($_GET['msg'] == 'erro'): ?>
+        <div class="container mt-3">
+            <div class="alert alert-danger alert-dismissible fade show text-center shadow-sm">
+                ❌ Ocorreu um erro ao executar a operação!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
 <h2>Viagens</h2>
 
 <a href="nova_viagem.php" class="btn btn-success mb-3">

@@ -8,6 +8,44 @@ try {
     echo "Erro: " . $e->getMessage();
 }
 ?>
+<?php if (isset($_GET['msg'])): ?>
+
+    <?php if ($_GET['msg'] == 'criado'): ?>
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show text-center shadow-sm">
+                ✅ Motorista cadastrado com sucesso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($_GET['msg'] == 'editado'): ?>
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show text-center shadow-sm">
+                ✏️ Motorista editado com sucesso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($_GET['msg'] == 'excluido'): ?>
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show text-center shadow-sm">
+                🗑️ Motorista excluído com sucesso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($_GET['msg'] == 'erro'): ?>
+        <div class="container mt-3">
+            <div class="alert alert-danger alert-dismissible fade show text-center shadow-sm">
+                ❌ Ocorreu um erro ao executar a operação!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
 
 <h2>Motoristas</h2>
 <a href="novo_motorista.php" class="btn btn-success mb-3">Novo Registro</a>

@@ -16,9 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql  = "DELETE FROM motoristas WHERE id = ?";
         $stmt = $conexao->prepare($sql);
         if ($stmt->execute([$id])) {
-            header('Location: crud_motoristas.php');
+            header('Location: crud_motoristas.php?msg=excluido');
+            exit;
         } else {
-            echo "Erro ao excluir";
+            header('Location: crud_motoristas.php?msg=erro');
+            exit;
         }
     } catch (Exception $e) {
         echo "Erro: " . $e->getMessage();
