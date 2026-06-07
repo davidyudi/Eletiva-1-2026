@@ -6,6 +6,7 @@
         exit;
     }
 ?>
+<?php $pagina = basename($_SERVER['PHP_SELF']); ?>
 <!doctype html>
 <html lang="pt-BR">
 
@@ -14,49 +15,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sistema</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
 </head>
-
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">Sistema</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Alternar navegação">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="principal.php">Início</a>
-          </li>
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown2" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Funções Básicas
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown2">
-              <li><a class="dropdown-item" href="categorias.php">Categorias</a></li>
-              <li><a class="dropdown-item" href="produtos.php">Produtos</a></li>
-            </ul>
-          </li>
+<a href="crud_motoristas.php"
+   class="nav-link fs-4 px-4 py-3 <?= $pagina == 'crud_motoristas.php' ? 'active' : '' ?>">
+    Motoristas
+</a>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown3" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Funções de Saída
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown3">
-              <li><a class="dropdown-item" href="#">Relatório de Produtos</a></li>
-            </ul>
-          </li>
+<a href="crud_veiculos.php"
+   class="nav-link fs-4 px-4 py-3 <?= $pagina == 'crud_veiculos.php' ? 'active' : '' ?>">
+    Veículos
+</a>
 
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="logout.php">Sair</a>
-          </li>
-        </ul>
-      </div>
+<a href="crud_rotas.php"
+   class="nav-link fs-4 px-4 py-3 <?= $pagina == 'crud_rotas.php' ? 'active' : '' ?>">
+    Rotas
+</a>
+
+        <a href="logout.php" class="btn btn-outline-danger ms-auto fs-4 px-5 py-3 me-3">
+            Sair
+        </a>
+
     </div>
-  </nav>
-  <div class="container py-3">
+</nav>
+<main class="conteudo">

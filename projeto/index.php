@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sistema de Controle de Estoque</title>
+    <title>Sistema de Controle de Frotas de Táxi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 </head>
 <body class="bg-light">
 
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
-        <h3 class="text-center mb-4">Sistema de Controle de Estoque</h3>
+        <h3 class="text-center mb-4">Sistema de Controle de Frotas de Táxi</h3>
 
         <form method="post">
             <div class="mb-3">
@@ -25,10 +26,10 @@
 
             <button type="submit" class="btn btn-primary w-100">Entrar</button>
             <?php
-                require_once('conexao.php');
                 session_start();
                 if ($_SERVER['REQUEST_METHOD'] == "POST")
                 {
+                    require_once('conexao.php');
                     $email = $_POST['email'];
                     $senha = $_POST['senha'];
                     try
@@ -37,21 +38,19 @@
                         $stmt->execute([$email]);
                         $usuario = $stmt->fetch();
                         $senha_correta = password_verify($senha,$usuario['senha']);
-                        if($usuario && $senha_correta)
-                        {
-                            $_SESSION['nome'] = $usuario['nome'];
-                            $_SESSION['acesso'] = true; 
-                            header('Location: principal.php');
+                        if ($usuario && $senha_correta)
+                            {
+                                $_SESSION['nome'] = $usuario['nome'];
+                                $_SESSION['acesso'] = true;
+                                header('Location: principal.php');
+                            }
+                        else{
+                            echo "<p class='text-danger'> Credenciais Inválidas!</p>";
                         }
-                        else
-                        {
-                            echo "<p class='text-danger> Credenciais inváidas!</p>";
-                        }
-                    } 
-                    catch(Exception $e)
-                    {
-                        echo "Erro: ". $e->getMessage();
+                    } catch(Exception $e){
+                        echo "Erro: ".$e->getMessage();
                     }
+                
                 }
             ?>
             <div class="text-center mt-3">

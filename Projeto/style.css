@@ -1,0 +1,395 @@
+:root{
+    --dark:#594f4f;
+    --dark-hover:#4a4343;
+    --secondary:#547980;
+    --primary:#45ada8;
+    --success:#9de0ad;
+    --light:#e5fcc2;
+
+    --radius:20px;
+}
+
+/* ===========================
+   GERAL
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#f5f6f8;
+    color:var(--dark);
+    min-height:100vh;
+    font-family:'Segoe UI',sans-serif;
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar{
+    background:var(--dark)!important;
+
+    min-height:75px;
+
+    padding:0 30px;
+
+    box-shadow:0 3px 15px rgba(0,0,0,.15);
+}
+
+.navbar-brand{
+    color:#fff!important;
+    font-weight:700;
+}
+
+.navbar-nav{
+    height:75px;
+    align-items:center;
+}
+
+.navbar-nav .nav-link{
+    color:#fff!important;
+
+    display:flex;
+    align-items:center;
+
+    height:75px;
+
+    padding:0 20px;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.navbar-nav .nav-link:hover{
+    background:var(--secondary);
+}
+
+.navbar-nav .nav-link.active{
+    background:#fff;
+
+    color:var(--dark)!important;
+
+    border-radius:12px;
+}
+
+/* ===========================
+   NAV TABS
+=========================== */
+
+.nav-tabs{
+    border:none!important;
+
+    background:transparent;
+}
+
+.nav-tabs .nav-link{
+    border:none!important;
+
+    color:#fff;
+
+    border-radius:12px;
+
+    margin-right:5px;
+
+    transition:.3s;
+}
+
+.nav-tabs .nav-link.active{
+    background:#fff!important;
+
+    color:var(--dark)!important;
+}
+
+.nav-tabs .nav-link:hover{
+    background:var(--secondary);
+}
+
+/* ===========================
+   CONTEÚDO PRINCIPAL
+=========================== */
+
+main,
+.conteudo,
+.container-principal{
+
+    max-width:1400px;
+
+    margin:30px auto;
+
+    background:#fff;
+
+    border-radius:25px;
+
+    padding:30px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+/* ===========================
+   CARDS
+=========================== */
+
+.card{
+
+    border:none!important;
+
+    border-radius:20px!important;
+
+    overflow:hidden;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.card-header{
+
+    background:var(--dark)!important;
+
+    color:#fff!important;
+
+    border:none!important;
+
+    padding:18px 25px;
+}
+
+.card-body{
+    padding:25px;
+}
+
+/* ===========================
+   FORMULÁRIOS
+=========================== */
+
+.form-label{
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.form-control,
+.form-select{
+
+    min-height:50px;
+
+    border-radius:12px;
+
+    border:2px solid #e5e7eb;
+
+    padding:10px 15px;
+
+    transition:.3s;
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 .25rem rgba(69,173,168,.15);
+}
+
+/* ===========================
+   BOTÕES
+=========================== */
+
+.btn{
+
+    border-radius:12px;
+
+    padding:10px 20px;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.btn-primary{
+
+    background:var(--dark);
+
+    border-color:var(--dark);
+}
+
+.btn-primary:hover{
+
+    background:var(--dark-hover);
+
+    border-color:var(--dark-hover);
+
+    transform:translateY(-2px);
+}
+
+.btn-secondary{
+
+    background:var(--secondary);
+
+    border-color:var(--secondary);
+}
+
+.btn-secondary:hover{
+
+    background:var(--primary);
+
+    border-color:var(--primary);
+}
+
+.btn-success{
+
+    background:var(--primary);
+
+    border-color:var(--primary);
+}
+
+/* ===========================
+   TABELAS
+=========================== */
+
+.table{
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    margin-bottom:0;
+}
+
+.table thead{
+
+    background:var(--dark);
+
+    color:#fff;
+}
+
+.table th{
+
+    padding:15px;
+
+    border:none;
+}
+
+.table td{
+
+    padding:15px;
+
+    vertical-align:middle;
+}
+
+.table-hover tbody tr:hover{
+
+    background:rgba(69,173,168,.08);
+}
+
+/* ===========================
+   ALERTAS
+=========================== */
+
+.alert{
+
+    border:none;
+
+    border-radius:15px;
+}
+
+.alert-success{
+
+    background:rgba(157,224,173,.35);
+
+    color:var(--dark);
+}
+
+/* ===========================
+   MODAL
+=========================== */
+
+.modal-content{
+
+    border:none;
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+.modal-header{
+
+    background:var(--dark);
+
+    color:#fff;
+}
+
+/* ===========================
+   PAGINAÇÃO
+=========================== */
+
+.page-link{
+
+    color:var(--dark);
+
+    border-radius:10px!important;
+
+    margin:0 3px;
+}
+
+.page-item.active .page-link{
+
+    background:var(--dark);
+
+    border-color:var(--dark);
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+footer{
+
+    max-width:1400px;
+
+    margin:20px auto;
+
+    border-radius:20px;
+
+    background:var(--dark);
+
+    color:#fff;
+
+    padding:20px;
+}
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media(max-width:992px){
+
+    main,
+    .conteudo,
+    .container-principal{
+
+        margin:15px;
+
+        padding:20px;
+    }
+
+    .navbar{
+        padding:0 15px;
+    }
+}
+
+@media(max-width:768px){
+
+    .btn{
+        width:100%;
+    }
+
+    .d-flex.gap-2{
+        flex-direction:column;
+    }
+
+    .card-body{
+        padding:20px;
+    }
+}

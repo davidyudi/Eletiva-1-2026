@@ -1,6 +1,6 @@
 <?php
 
-    $dominio = "mysql:host=localhost;dbname=projetophp";//SGBD/ onde ta hospedado o meu banco de dados/dbname
+    $dominio = "mysql:host=127.0.0.1;dbname=projetophp";//SGBD/ onde ta hospedado o meu banco de dados/dbname
     $usuario = "root";
     $senha = "";
 
