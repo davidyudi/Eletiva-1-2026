@@ -1,5 +1,5 @@
 <?php
-    include('cabecalho.php');
+include('cabecalho.php');
 ?>
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -51,28 +51,28 @@
     </div>
 </div>
 <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        require_once('conexao.php');
-        $nome            = $_POST['nome'];
-        $data_nascimento = $_POST['data_nascimento'];
-        $cpf             = $_POST['cpf'];
-        $email           = $_POST['email'];
-        $telefone        = $_POST['telefone'];
-        $cnh             = $_POST['cnh'];
-        try {
-            $stmt = $conexao->prepare(
-                'INSERT INTO motoristas (nome, data_nascimento, cpf, email, telefone, cnh) VALUES (?,?,?,?,?,?);'
-            );
-            if ($stmt->execute([$nome, $data_nascimento, $cpf, $email, $telefone, $cnh])) {
-                echo "<p>Cadastro Realizado!</p>";
-            } else {
-                echo "<p>Erro ao cadastrar! Tente novamente.</p>";
-            }
-        } catch(Exception $e) {
-            echo "Erro: " . $e->getMessage();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    require_once('conexao.php');
+    $nome            = $_POST['nome'];
+    $data_nascimento = $_POST['data_nascimento'];
+    $cpf             = $_POST['cpf'];
+    $email           = $_POST['email'];
+    $telefone        = $_POST['telefone'];
+    $cnh             = $_POST['cnh'];
+    try {
+        $stmt = $conexao->prepare(
+            'INSERT INTO motoristas (nome, data_nascimento, cpf, email, telefone, cnh) VALUES (?,?,?,?,?,?);'
+        );
+        if ($stmt->execute([$nome, $data_nascimento, $cpf, $email, $telefone, $cnh])) {
+            echo "<p>Cadastro Realizado!</p>";
+        } else {
+            echo "<p>Erro ao cadastrar! Tente novamente.</p>";
         }
+    } catch (Exception $e) {
+        echo "Erro: " . $e->getMessage();
     }
+}
 ?>
 <?php
-    include('rodape.php');
+include('rodape.php');
 ?>

@@ -1,30 +1,26 @@
 <?php
-    include('cabecalho.php');
-    require_once('conexao.php');
+include('cabecalho.php');
+require_once('conexao.php');
 
-    // Carrega estados ordenados
-    $estados = $conexao->query(
-        'SELECT e.id, e.sigla FROM estados e ORDER BY e.sigla'
-    )->fetchAll(PDO::FETCH_ASSOC);
+$estados = $conexao->query(
+    'SELECT e.id, e.sigla FROM estados e ORDER BY e.sigla'
+)->fetchAll(PDO::FETCH_ASSOC);
 
-    // Carrega todas as cidades agrupadas por estado_id para o JS
-    $todasCidades = $conexao->query(
-        'SELECT c.id, c.nome, c.estado_id FROM cidades c ORDER BY c.nome'
-    )->fetchAll(PDO::FETCH_ASSOC);
+$todasCidades = $conexao->query(
+    'SELECT c.id, c.nome, c.estado_id FROM cidades c ORDER BY c.nome'
+)->fetchAll(PDO::FETCH_ASSOC);
 
-    // Monta objeto JS: { estado_id: [{id, nome}, ...], ... }
-    $cidadesPorEstado = [];
-    foreach ($todasCidades as $c) {
-        $cidadesPorEstado[$c['estado_id']][] = ['id' => $c['id'], 'nome' => $c['nome']];
-    }
-    $cidadesJson = json_encode($cidadesPorEstado, JSON_UNESCAPED_UNICODE);
+$cidadesPorEstado = [];
+foreach ($todasCidades as $c) {
+    $cidadesPorEstado[$c['estado_id']][] = ['id' => $c['id'], 'nome' => $c['nome']];
+}
+$cidadesJson = json_encode($cidadesPorEstado, JSON_UNESCAPED_UNICODE);
 
-    // Monta mapa estado sigla -> id para o JS
-    $estadosPorSigla = [];
-    foreach ($estados as $e) {
-        $estadosPorSigla[$e['sigla']] = $e['id'];
-    }
-    $estadosJson = json_encode($estados, JSON_UNESCAPED_UNICODE);
+$estadosPorSigla = [];
+foreach ($estados as $e) {
+    $estadosPorSigla[$e['sigla']] = $e['id'];
+}
+$estadosJson = json_encode($estados, JSON_UNESCAPED_UNICODE);
 ?>
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -36,7 +32,6 @@
                 <div class="card-body p-4">
                     <form method="post">
 
-                        <!-- INÍCIO -->
                         <p class="fw-bold text-uppercase" style="font-size:.75rem;letter-spacing:1px;color:#888;margin-bottom:8px;">Ponto de Início</p>
                         <div class="row g-3 mb-4">
                             <div class="col-md-4">
@@ -56,12 +51,10 @@
                                 <select id="cidade_inicio_id" name="cidade_inicio_id" class="form-select" required disabled>
                                     <option value="">Selecione o estado primeiro...</option>
                                 </select>
-                                <!-- campo hidden para salvar o nome da cidade -->
                                 <input type="hidden" id="cidade_inicio_label" name="cidade_inicio_nome">
                             </div>
                         </div>
 
-                        <!-- FIM -->
                         <p class="fw-bold text-uppercase" style="font-size:.75rem;letter-spacing:1px;color:#888;margin-bottom:8px;">Ponto de Fim</p>
                         <div class="row g-3 mb-4">
                             <div class="col-md-4">
@@ -97,60 +90,57 @@
 </div>
 
 <script>
-const cidadesPorEstado = <?= $cidadesJson ?>;
-const estadosList      = <?= $estadosJson ?>;
+    const cidadesPorEstado = <?= $cidadesJson ?>;
+    const estadosList = <?= $estadosJson ?>;
 
-function carregarCidades(sigla, selectCidadeId, hiddenNomeId) {
-    const selectCidade = document.getElementById(selectCidadeId);
-    const hiddenNome   = document.getElementById(hiddenNomeId);
+    function carregarCidades(sigla, selectCidadeId, hiddenNomeId) {
+        const selectCidade = document.getElementById(selectCidadeId);
+        const hiddenNome = document.getElementById(hiddenNomeId);
 
-    // Reseta
-    selectCidade.innerHTML = '<option value="">Selecione a cidade...</option>';
-    selectCidade.disabled  = true;
-    hiddenNome.value = '';
+        selectCidade.innerHTML = '<option value="">Selecione a cidade...</option>';
+        selectCidade.disabled = true;
+        hiddenNome.value = '';
 
-    if (!sigla) return;
+        if (!sigla) return;
 
-    // Acha o estado_id pela sigla
-    const estado = estadosList.find(e => e.sigla === sigla);
-    if (!estado) return;
+        const estado = estadosList.find(e => e.sigla === sigla);
+        if (!estado) return;
 
-    const cidades = cidadesPorEstado[estado.id] || [];
-    cidades.forEach(c => {
-        const opt = document.createElement('option');
-        opt.value       = c.id;
-        opt.textContent = c.nome;
-        selectCidade.appendChild(opt);
-    });
+        const cidades = cidadesPorEstado[estado.id] || [];
+        cidades.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c.id;
+            opt.textContent = c.nome;
+            selectCidade.appendChild(opt);
+        });
 
-    selectCidade.disabled = false;
+        selectCidade.disabled = false;
 
-    // Atualiza o hidden com o nome quando a cidade for selecionada
-    selectCidade.onchange = function() {
-        const opt = this.options[this.selectedIndex];
-        hiddenNome.value = opt ? opt.textContent : '';
-    };
-}
+        selectCidade.onchange = function() {
+            const opt = this.options[this.selectedIndex];
+            hiddenNome.value = opt ? opt.textContent : '';
+        };
+    }
 </script>
 
 <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $cidade_inicio = $_POST['cidade_inicio_nome'];
-        $estado_inicio = $_POST['estado_inicio'];
-        $cidade_fim    = $_POST['cidade_fim_nome'];
-        $estado_fim    = $_POST['estado_fim'];
-        try {
-            $stmt = $conexao->prepare(
-                'INSERT INTO rotas (Cidade_inicio, Estado_inicio, Cidade_fim, Estado_fim) VALUES (?,?,?,?);'
-            );
-            if ($stmt->execute([$cidade_inicio, $estado_inicio, $cidade_fim, $estado_fim])) {
-                echo "<p>Cadastro Realizado!</p>";
-            } else {
-                echo "<p>Erro ao cadastrar! Tente novamente.</p>";
-            }
-        } catch(Exception $e) {
-            echo "Erro: " . $e->getMessage();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $cidade_inicio = $_POST['cidade_inicio_nome'];
+    $estado_inicio = $_POST['estado_inicio'];
+    $cidade_fim    = $_POST['cidade_fim_nome'];
+    $estado_fim    = $_POST['estado_fim'];
+    try {
+        $stmt = $conexao->prepare(
+            'INSERT INTO rotas (Cidade_inicio, Estado_inicio, Cidade_fim, Estado_fim) VALUES (?,?,?,?);'
+        );
+        if ($stmt->execute([$cidade_inicio, $estado_inicio, $cidade_fim, $estado_fim])) {
+            echo "<p>Cadastro Realizado!</p>";
+        } else {
+            echo "<p>Erro ao cadastrar! Tente novamente.</p>";
         }
+    } catch (Exception $e) {
+        echo "Erro: " . $e->getMessage();
     }
+}
 ?>
 <?php include('rodape.php'); ?>

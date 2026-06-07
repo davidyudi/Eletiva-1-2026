@@ -1,34 +1,34 @@
 <?php
-    require_once('cabecalho.php');
-    require_once('conexao.php');
-    $mensagem = "";
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $nome            = $_POST['nome'];
-        $data_nascimento = $_POST['data_nascimento'];
-        $cpf             = $_POST['cpf'];
-        $email           = $_POST['email'];
-        $telefone        = $_POST['telefone'];
-        $cnh             = $_POST['cnh'];
-        $id              = $_GET['id'];
-        try {
-            $sql  = "UPDATE motoristas SET nome=?, data_nascimento=?, cpf=?, email=?, telefone=?, cnh=? WHERE id=?";
-            $stmt = $conexao->prepare($sql);
-            if ($stmt->execute([$nome, $data_nascimento, $cpf, $email, $telefone, $cnh, $id])) {
-                $mensagem = "<p>Alteração Realizada!</p>";
-            } else {
-                $mensagem = "<p>Erro ao Alterar! Tente novamente.</p>";
-            }
-        } catch(Exception $e) {
-            echo "Erro: " . $e->getMessage();
-        }
-    }
+require_once('cabecalho.php');
+require_once('conexao.php');
+$mensagem = "";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nome            = $_POST['nome'];
+    $data_nascimento = $_POST['data_nascimento'];
+    $cpf             = $_POST['cpf'];
+    $email           = $_POST['email'];
+    $telefone        = $_POST['telefone'];
+    $cnh             = $_POST['cnh'];
+    $id              = $_GET['id'];
     try {
-        $stmt = $conexao->prepare("SELECT * FROM motoristas WHERE id = ?");
-        $stmt->execute([$_GET['id']]);
-        $resultado = $stmt->fetch();
-    } catch(Exception $e) {
+        $sql  = "UPDATE motoristas SET nome=?, data_nascimento=?, cpf=?, email=?, telefone=?, cnh=? WHERE id=?";
+        $stmt = $conexao->prepare($sql);
+        if ($stmt->execute([$nome, $data_nascimento, $cpf, $email, $telefone, $cnh, $id])) {
+            $mensagem = "<p>Alteração Realizada!</p>";
+        } else {
+            $mensagem = "<p>Erro ao Alterar! Tente novamente.</p>";
+        }
+    } catch (Exception $e) {
         echo "Erro: " . $e->getMessage();
     }
+}
+try {
+    $stmt = $conexao->prepare("SELECT * FROM motoristas WHERE id = ?");
+    $stmt->execute([$_GET['id']]);
+    $resultado = $stmt->fetch();
+} catch (Exception $e) {
+    echo "Erro: " . $e->getMessage();
+}
 ?>
 <div class="container mt-5">
     <div class="row justify-content-center">
